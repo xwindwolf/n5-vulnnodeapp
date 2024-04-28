@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install -g npm@latest
+      - npm install -g --unsafe-perm snyk
+    pre_build:
+      commands:
+        - npm install
+    build:
+      commands:
+        - npm test
+        - snyk test
+    post_build:
+      commands:
+        - npm run build
+        - docker build -t $REPOSITORY_URI:latest .
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
