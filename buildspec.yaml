@@ -11,10 +11,11 @@ phases:
   pre_build:
     commands:
       - npm install
-  build:
+  dependency_scan:
     commands:
       - snyk auth $SNYK_TOKEN
       - snyk test
+  sast_secret_scan:
       - bearer scan .
       - bearer scan . --scanner=secrets
   post_build:
