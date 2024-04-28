@@ -6,7 +6,8 @@ phases:
       nodejs: 18
     commands:
       - npm install -g npm@latest
-      - npm install -g --unsafe-perm snyk
+      - npm install -g snyk
+      - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh
   pre_build:
     commands:
       - npm install
@@ -14,6 +15,8 @@ phases:
     commands:
       - snyk auth $SNYK_TOKEN
       - snyk test
+      - bearer scan .
+      - bearer scan . --scanner=secrets
   post_build:
     commands:
       - docker build -t $REPOSITORY_URI:latest .
