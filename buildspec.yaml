@@ -16,6 +16,7 @@ phases:
       - snyk auth $SNYK_TOKEN
       - snyk test
   sast_secret_scan:
+    commands:
       - bearer scan .
       - bearer scan . --scanner=secrets
   post_build:
