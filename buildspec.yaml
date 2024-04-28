@@ -12,11 +12,11 @@ phases:
     on-failure: continue
     commands:
       - npm install
+      - snyk auth $SNYK_TOKEN
+      - snyk test
   build:
     on-failure: continue
     commands:
-      - snyk auth $SNYK_TOKEN
-      - snyk test
       - ./bin/bearer scan .
       - ./bin/bearer scan . --scanner=secrets
   post_build:
