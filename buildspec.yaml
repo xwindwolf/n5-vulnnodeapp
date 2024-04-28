@@ -12,6 +12,7 @@ phases:
       - npm install
   build:
     commands:
+      - snyk auth $SNYK_TOKEN
       - snyk test
   post_build:
     commands:
