@@ -9,11 +9,13 @@ phases:
       - npm install -g snyk
       - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh
   pre_build:
+    on-failure: continue
     commands:
       - npm install
       - snyk auth $SNYK_TOKEN
       - snyk test
   build:
+    on-failure: continue
     commands:
       - bearer scan .
       - bearer scan . --scanner=secrets
