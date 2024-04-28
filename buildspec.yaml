@@ -12,13 +12,13 @@ phases:
     on-failure: continue
     commands:
       - npm install
-      - snyk auth $SNYK_TOKEN
-      - snyk test
   build:
     on-failure: continue
     commands:
-      - bearer scan .
-      - bearer scan . --scanner=secrets
+      - snyk auth $SNYK_TOKEN
+      - snyk test
+      - ./bin/bearer scan .
+      - ./bin/bearer scan . --scanner=secrets
   post_build:
     commands:
       - docker build -t $REPOSITORY_URI:latest .
