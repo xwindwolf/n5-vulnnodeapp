@@ -23,7 +23,7 @@ phases:
   post_build:
     commands:
       - docker build -t $REPOSITORY_URI:latest .
-      - docker image push -a $REPOSITORY_URI:latest
+      - docker image push -a $REPOSITORY_URI
 artifacts:
   files:
     - '**/*'
