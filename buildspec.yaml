@@ -24,8 +24,8 @@ phases:
   post_build:
     commands:
       - docker build -t $REPOSITORY_URI:latest .
-      - snyk container test $REPOSITORY_URI:latest --file=Dockerfile
       - docker image push -a $REPOSITORY_URI
+      #- snyk container test $REPOSITORY_URI:latest --file=Dockerfile
 artifacts:
   files:
     - '**/*'

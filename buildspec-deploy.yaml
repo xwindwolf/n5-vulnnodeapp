@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      ubuntu: 20.04
+    commands:
+      - sudo apt update
+      - sudo apt-get install nodejs -y
+      - sudo apt install npm -y
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
+      - echo "$DOCKER_PWD" | docker login --username xwindwolf --password-stdin
+      - npm install -g npm@latest
+      - npm install -g snyk
+      - curl -sfL https://raw.githubusercontent.com/Bearer/bearer/main/contrib/install.sh | sh
+      - sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+      - wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor |sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+      - gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+      - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+      - sudo apt update && sudo apt install terraform -y
+  pre_build:
+    commands:
+      - terraform -chdir=terraform/ init
+      - terraform -chdir=terraform/ validate
+  build:
+    commands:
+      - terraform -chdir=terraform/ plan
+      - terraform -chdir=terraform/ apply -auto-approve
+      - public_ip=$(terraform -chdir=terraform/ output ec2_global_ips)
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes

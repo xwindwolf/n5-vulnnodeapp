@@ -1333,4 +1333,53 @@ File: utils/utility.js:110
 
 =====================================
 ```
+__Container Scan__
 
+```
+Testing 047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp:latest...
+
+Organization:      xwindwolf
+Package manager:   deb
+Target file:       Dockerfile
+Project name:      docker-image|047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp
+Docker image:      047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp:latest
+Platform:          linux/amd64
+Base image:        ubuntu:latest
+Licenses:          enabled
+
+✔ Tested 141 dependencies for known issues, no vulnerable paths found.
+Note that we currently do not have vulnerability information for Ubuntu 24.04, which we detected in your image.
+-------------------------------------------------------
+
+Testing 047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp:latest...
+Tested 13 dependencies for known issues, found 1 issue.
+Issues with no direct upgrade or patch:
+  ✗ Arbitrary Code Execution [Critical Severity][https://security.snyk.io/vuln/npm:node-serialize:20170208] in node-serialize@0.0.4
+    introduced by node-serialize@0.0.4
+  No upgrade or patch available
+
+Organization:      xwindwolf
+Package manager:   npm
+Target file:       /opt/vuln-node-app/package.json
+Project name:      reportcreator
+Docker image:      047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp:latest
+Licenses:          enabled
+
+Pro tip: use `--exclude-base-image-vulns` to exclude from display Docker base image vulnerabilities.
+Snyk found some vulnerabilities in your image applications (Snyk searches for these vulnerabilities by default). See https://snyk.co/app-vulns for more information.
+To remove these messages in the future, please run `snyk config set disableSuggestions=true`
+-------------------------------------------------------
+
+Testing 047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp:latest...
+
+Organization:      xwindwolf
+Package manager:   gomodules
+Target file:       /opt/vuln-node-app/bin/bearer
+Project name:      github.com/bearer/bearer
+Docker image:      047527637988.dkr.ecr.us-east-1.amazonaws.com/n5-vulnnodeapp:latest
+Licenses:          enabled
+
+✔ Tested 253 dependencies for known issues, no vulnerable paths found.
+
+Tested 3 projects, 1 contained vulnerable paths.
+```
