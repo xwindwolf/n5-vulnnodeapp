@@ -5,13 +5,13 @@ que brinda AWS tal como lo es:
 - AWS CodeCommit
 - AWS CodePipeline
 - AWS CodeBuild
-- AWS CodeDeploy
-- AWS CodeGuru
-- AWS ECR Scan
-- AWS Secrets Manager
-- AWS Security Hub
+- AWS ECR
+- Terraform
+- Snyk
+- Bearer
+- Docker
 
-## Passos a Seguir
+## Pasos a Seguir
 
 ### Crear un repositorio en CodeCommit
 Teniendo el `awscli` configurado con mis variables de ambiente, utilize 
@@ -65,6 +65,8 @@ git remote set-url origin <ssh_url>
         - Crear un container de docker con la app utilizando comando de docker,
           y crear un repositorio en ECR para guardar la imagen.
     - __Deploy__: Usar terraform para crear el EC2 t2.nano instance, instalarle docker y correr el container.
+    - __DAST__: Usando OWASP ZAP, correr el scan contra la app lanzada:
+      - `docker run -v  zap_report:/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://<ip_publica>/ -g gen.conf -r testreport.html`
 
 
 ### Vulnerabilidades
