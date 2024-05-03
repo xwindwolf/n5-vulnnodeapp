@@ -14,18 +14,18 @@ phases:
     on-failure: continue
     commands:
       - npm install
-      #- snyk auth $SNYK_TOKEN
-      #- snyk test
+      - snyk auth $SNYK_TOKEN
+      - snyk test
   build:
     on-failure: continue
     commands:
-      #- ./bin/bearer scan . --exit-code 0
-      #- ./bin/bearer scan . --scanner=secrets --exit-code 0
+      - ./bin/bearer scan . --exit-code 0
+      - ./bin/bearer scan . --scanner=secrets --exit-code 0
   post_build:
     commands:
       - docker build -t $REPOSITORY_URI:latest .
       - docker image push -a $REPOSITORY_URI
-      #- snyk container test $REPOSITORY_URI:latest --file=Dockerfile
+      - snyk container test $REPOSITORY_URI:latest --file=Dockerfile
 artifacts:
   files:
     - '**/*'
