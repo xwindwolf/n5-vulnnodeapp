@@ -64,6 +64,7 @@ git remote set-url origin <ssh_url>
         de dependencias, SAST, y secrets. Se utiliza snyk y bearer cli.
         - Crear un container de docker con la app utilizando comando de docker,
           y crear un repositorio en ECR para guardar la imagen.
+    - __Deploy__: Usar terraform para crear el EC2 t2.nano instance, instalarle docker y correr el container.
 
 
 ### Vulnerabilidades
